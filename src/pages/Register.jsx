@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { auth, storage, db } from '../firebase'
@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useState } from 'react'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [err, setErr] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -74,7 +75,7 @@ const Register = () => {
                         <p className="ml-2">Add an avatar</p>
                     </div>
                 </label>
-                <button className="bg-white flex items-center justify-center w-[100%] mt-4 py-2 text-yellow-800">Sign up</button>
+                <button className="bg-white flex items-center justify-center w-[100%] mt-4 py-2 text-yellow-800" onClick={() => navigate('/Login')}>Sign up</button>
                 {err && <span>Something went wrong</span>}
             </form>
             <p className="text-white text-center mt-2 pb-2">You do have an account? <Link to='/Login' className="font-bold underline">Login</Link></p>
